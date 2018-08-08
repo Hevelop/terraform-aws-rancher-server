@@ -11,7 +11,7 @@ yum install -y jq docker
 service docker start
 
 # Pull required images
-docker pull rancher/server:${server_version}
+docker pull rancher/rancher:${server_version}
 docker pull greensheep/rancher-delete-host
 docker pull nginx:1.10-alpine
 docker pull jwilder/docker-gen:0.7.3
@@ -28,7 +28,7 @@ docker run -d --restart=always --name=rancher-server --expose 8080/tcp \
            -e VIRTUAL_PORT=8080 \
            -e LETSENCRYPT_HOST=${server_hostname} \
            -e LETSENCRYPT_EMAIL=${ssl_email} \
-              rancher/server:${server_version}
+              rancher/rancher:${server_version}
 
 # Wait for rancher server to start
 serverIp=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' rancher-server)
